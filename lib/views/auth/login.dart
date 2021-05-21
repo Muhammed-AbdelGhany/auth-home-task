@@ -50,122 +50,125 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(color: AppColors.pColor),
-              width: double.infinity,
-              height: height * .20,
-            ),
-            Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      key: ValueKey('email'),
-                      validator: (value) => AutoValidate.email(value)
-                          ? null
-                          : 'enter a valid Email',
-                      textInputAction: TextInputAction.next,
-                      onEditingComplete: () =>
-                          FocusScope.of(context).requestFocus(_passwordFN),
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        filled: false,
-                        labelText: "EMAIL ADDRESS",
-                      ),
-                      onSaved: (newValue) => _emailAdress = newValue,
-                    ),
-                    SizedBox(height: 16),
-                    TextFormField(
-                      key: ValueKey('password'),
-                      validator: (value) => AutoValidate.password(value)
-                          ? null
-                          : 'enter a valid Password',
-                      textInputAction: TextInputAction.done,
-                      focusNode: _passwordFN,
-                      onEditingComplete: onSubmit,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        filled: false,
-                        labelText: "PASSWORD",
-                        suffix: Text('Forgot Passowrd'),
-                      ),
-                      onSaved: (newValue) => _password = newValue,
-                    ),
-                    SizedBox(
-                      height: 58,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Don\'t have an account ? '),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, SignUpScreen.routeName);
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                color: Colors.blue[400],
-                                fontWeight: FontWeight.bold),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(color: AppColors.pColor),
+                    width: double.infinity,
+                    height: height * .20,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            key: ValueKey('email'),
+                            validator: (value) => AutoValidate.email(value)
+                                ? null
+                                : 'enter a valid Email',
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => FocusScope.of(context)
+                                .requestFocus(_passwordFN),
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              border: UnderlineInputBorder(),
+                              filled: false,
+                              labelText: "EMAIL ADDRESS",
+                            ),
+                            onSaved: (newValue) => _emailAdress = newValue,
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Image.asset("assets/images/facebook.png"),
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Container(
-                          child: Image.asset("assets/images/gmail.png"),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    GestureDetector(
-                      onTap: onSubmit,
-                      child: Container(
-                        width: double.infinity - 2,
-                        height: 57,
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.pColor,
-                        ),
+                          SizedBox(height: 16),
+                          TextFormField(
+                            key: ValueKey('password'),
+                            validator: (value) => AutoValidate.password(value)
+                                ? null
+                                : 'enter a valid Password',
+                            textInputAction: TextInputAction.done,
+                            focusNode: _passwordFN,
+                            onEditingComplete: onSubmit,
+                            keyboardType: TextInputType.emailAddress,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: UnderlineInputBorder(),
+                              filled: false,
+                              labelText: "PASSWORD",
+                              suffix: Text('Forgot Passowrd'),
+                            ),
+                            onSaved: (newValue) => _password = newValue,
+                          ),
+                          SizedBox(
+                            height: 58,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Don\'t have an account ? '),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, SignUpScreen.routeName);
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      color: Colors.blue[400],
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                child:
+                                    Image.asset("assets/images/facebook.png"),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Container(
+                                child: Image.asset("assets/images/gmail.png"),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          GestureDetector(
+                            onTap: onSubmit,
+                            child: Container(
+                              width: double.infinity - 2,
+                              height: 57,
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: AppColors.pColor,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
     );
   }
 }
