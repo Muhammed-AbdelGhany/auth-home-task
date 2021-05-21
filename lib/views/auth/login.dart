@@ -1,7 +1,11 @@
 import 'package:auth_ecommerce_task/views/auth/signup.dart';
+import 'package:auth_ecommerce_task/views/home.dart';
 import 'package:auto_validate/auto_validate.dart';
 import 'package:flutter/material.dart';
 import 'package:auth_ecommerce_task/theme/colors.dart';
+import 'package:auth_ecommerce_task/controllers/auth_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routename = '/loginscreen';
@@ -15,17 +19,30 @@ class _LoginScreenState extends State<LoginScreen> {
   String _emailAdress = '';
   String _password = '';
 
+  bool _isLoading = false;
   @override
   void dispose() {
     _passwordFN.dispose();
     super.dispose();
   }
 
-  void onSubmit() {
+  void onSubmit() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState.save();
+      await Provider.of<Auth>(context, listen: false)
+          .loginWithEmailAndPAssword(_emailAdress, _password)
+          .then((value) {
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      });
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 

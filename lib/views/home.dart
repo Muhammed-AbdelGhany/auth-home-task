@@ -4,6 +4,6 @@ class HomeScreen extends StatelessWidget {
   static const routeName = '/HomeScreen';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
