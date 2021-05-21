@@ -1,3 +1,4 @@
+import 'package:auth_ecommerce_task/views/auth/signup.dart';
 import 'package:auto_validate/auto_validate.dart';
 import 'package:flutter/material.dart';
 import 'package:auth_ecommerce_task/theme/colors.dart';
@@ -13,85 +14,140 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode _passwordFN = FocusNode();
   String _emailAdress = '';
   String _password = '';
+
+  @override
+  void dispose() {
+    _passwordFN.dispose();
+    super.dispose();
+  }
+
+  void onSubmit() {
+    final isValid = _formKey.currentState.validate();
+    FocusScope.of(context).unfocus();
+    if (isValid) {
+      _formKey.currentState.save();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(color: AppColors.pColor),
-            width: double.infinity,
-            height: height * .20,
-          ),
-          Form(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(color: AppColors.pColor),
+              width: double.infinity,
+              height: height * .20,
+            ),
+            Form(
               key: _formKey,
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        key: ValueKey('email'),
-                        validator:
-                            /*(value) => AutoValidate.email(value.toString())
-                            ? null
-                            : 'Please enter a valid email'*/
-                            FormValidator.email(
-                                errorMessage: 'Please Enter a Valid Email'),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () =>
-                            FocusScope.of(context).requestFocus(_passwordFN),
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          filled: false,
-                          labelText: "EMAIL ADDRESS",
+                child: Column(
+                  children: [
+                    TextFormField(
+                      key: ValueKey('email'),
+                      validator: (value) => AutoValidate.email(value)
+                          ? null
+                          : 'enter a valid Email',
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () =>
+                          FocusScope.of(context).requestFocus(_passwordFN),
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        filled: false,
+                        labelText: "EMAIL ADDRESS",
+                      ),
+                      onSaved: (newValue) => _emailAdress = newValue,
+                    ),
+                    SizedBox(height: 16),
+                    TextFormField(
+                      key: ValueKey('password'),
+                      validator: (value) => AutoValidate.password(value)
+                          ? null
+                          : 'enter a valid Password',
+                      textInputAction: TextInputAction.done,
+                      focusNode: _passwordFN,
+                      onEditingComplete: onSubmit,
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        filled: false,
+                        labelText: "PASSWORD",
+                        suffix: Text('Forgot Passowrd'),
+                      ),
+                      onSaved: (newValue) => _password = newValue,
+                    ),
+                    SizedBox(
+                      height: 58,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Don\'t have an account ? '),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, SignUpScreen.routeName);
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                color: Colors.blue[400],
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Image.asset("assets/images/facebook.png"),
                         ),
-                        onSaved: (newValue) => _emailAdress = newValue,
-                      ),
-                      SizedBox(height: 16),
-                      TextFormField(
-                        key: ValueKey('password'),
-                        validator:
-                            /*(value) => AutoValidate.email(value.toString())
-                            ? null
-                            : 'Please enter a valid email'*/
-                            FormValidator.password(
-                                errorMessage: 'Please Enter a Valid Passowrd'),
-                        textInputAction: TextInputAction.next,
-                        focusNode: _passwordFN,
-                        onEditingComplete: () =>
-                            FocusScope.of(context).requestFocus(_passwordFN),
-                        keyboardType: TextInputType.emailAddress,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          filled: false,
-                          labelText: "PASSWORD",
-                          suffix: Text('Forgot Passowrd'),
+                        SizedBox(
+                          width: 16,
                         ),
-                        onSaved: (newValue) => _password = newValue,
+                        Container(
+                          child: Image.asset("assets/images/gmail.png"),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    GestureDetector(
+                      onTap: onSubmit,
+                      child: Container(
+                        width: double.infinity - 2,
+                        height: 57,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.pColor,
+                        ),
                       ),
-                      SizedBox(
-                        height: 42,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Don\'t have an account ? '),
-                          Text('Sign Up',
-                              style: TextStyle(color: Colors.blue[400]))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              ))
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color pColor = Colors.blue[800];
+  static Color pColor = Colors.blue[700];
 }
