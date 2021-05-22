@@ -40,12 +40,12 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((value) {
         Navigator.pushReplacementNamed(context, BottomBarScreen.routeName);
       });
-      Future.delayed(Duration(seconds: 2), () {
-        setState(() {
-          _isLoading = false;
-        });
-      });
     }
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override

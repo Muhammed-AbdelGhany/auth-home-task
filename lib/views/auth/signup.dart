@@ -88,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Form(
                     key: _formKey,
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(12),
                       child: Column(
                         children: [
                           TextFormField(
@@ -108,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onSaved: (newValue) => _name = newValue,
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 12),
                           TextFormField(
                             key: ValueKey('phoneNumber'),
                             validator: (value) => AutoValidate.phone(value)
@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onSaved: (newValue) => _phoneNumber = newValue,
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 12),
                           TextFormField(
                             key: ValueKey('email'),
                             validator: (value) => AutoValidate.email(value)
@@ -154,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onSaved: (newValue) => _emailAdress = newValue,
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 12),
                           TextFormField(
                             key: ValueKey('password'),
                             validator: (value) => AutoValidate.password(value)
@@ -179,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onSaved: (newValue) => _password = newValue,
                           ),
                           SizedBox(
-                            height: 16,
+                            height: 12,
                           ),
                           TextFormField(
                             key: ValueKey('Address'),
@@ -198,27 +198,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onSaved: (newValue) => _address = newValue,
                           ),
-                          SizedBox(height: 16),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                    value: _checkboxval,
-                                    onChanged: (bool newVal) {
-                                      setState(() {
-                                        _checkboxval = newVal;
-                                      });
-                                    }),
-                                Text("I have Read and agree to the "),
-                                Text(
-                                  "Terms and conditions",
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blue[600]),
-                                ),
-                              ],
-                            ),
+                          SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                  value: _checkboxval,
+                                  onChanged: (bool newVal) {
+                                    setState(() {
+                                      _checkboxval = newVal;
+                                    });
+                                  }),
+                              Text(
+                                "I have Read and agree to the ",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              Text(
+                                "Terms and conditions",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue[600],
+                                    fontSize: 12),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: height * 0.09,
