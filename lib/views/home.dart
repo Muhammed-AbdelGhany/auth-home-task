@@ -1,4 +1,5 @@
 import 'package:auth_ecommerce_task/theme/colors.dart';
+import 'package:auth_ecommerce_task/widgets/reminders_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auth_ecommerce_task/helpers/global-widgets.dart';
 import 'package:auth_ecommerce_task/widgets/services_widget.dart';
@@ -13,6 +14,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _controller = TextEditingController();
   String imagep = 'assets/images/products.png';
+  String imagel = 'assets/images/labs.png';
+  String imaged = 'assets/images/doctors.png';
+  String imageh = 'assets/images/hospitals.png';
+  String imagea = 'assets/images/appointments.png';
+  String imager = 'assets/images/reminder.png';
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +87,44 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 16),
               headLine('Our Services'),
               SizedBox(height: 16),
-              ServiceWidget(
-                title: 'Product',
-                image: imagep,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ServiceWidget(
+                    title: 'Product',
+                    image: imagep,
+                  ),
+                  ServiceWidget(
+                    title: 'Labs',
+                    image: imagel,
+                  ),
+                  ServiceWidget(
+                    title: 'Doctors',
+                    image: imaged,
+                  ),
+                  ServiceWidget(
+                    title: 'Hospitals',
+                    image: imageh,
+                  ),
+                ],
               ),
+              SizedBox(height: 16),
+              headLine('Reminders'),
+              SizedBox(height: 16),
+              ReminderWidget(
+                image: imager,
+                title: 'Dose Rminder',
+                subtitle: 'Next Dosage',
+              ),
+              SizedBox(height: 8),
+              ReminderWidget(
+                image: imagea,
+                title: 'Appointments',
+                subtitle: 'See Your Next Appointment',
+              ),
+              SizedBox(height: 16),
+              headLine('Recommended For You'),
+              SizedBox(height: 16),
             ],
           ),
         ),

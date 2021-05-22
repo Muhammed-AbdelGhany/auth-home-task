@@ -11,9 +11,16 @@ class ServiceWidget extends StatelessWidget {
       child: Column(
         children: [
           ClipRRect(
+              borderRadius: BorderRadius.circular(5),
               child: Container(
-            child: Image.asset(image),
-          )),
+                color: Colors.white,
+                height: 60,
+                width: 73,
+                child: Image.asset(image),
+              )),
+          SizedBox(
+            height: 8,
+          ),
           Text(title),
         ],
       ),
