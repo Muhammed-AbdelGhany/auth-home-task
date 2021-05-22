@@ -54,7 +54,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           height: 63,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Colors.white,
             ),
             child: BottomNavigationBar(
               showUnselectedLabels: true,
@@ -71,7 +71,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                   title: Text('Home'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.record_voice_over),
+                  icon: Container(
+                    child: Image.asset(
+                      "assets/images/medical.png",
+                      height: 30,
+                    ),
+                  ),
                   title: Text('Record'),
                 ),
                 BottomNavigationBarItem(
@@ -79,13 +84,21 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                   title: Text('Explore'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.shield,
+                  icon: Container(
+                    child: Image.asset(
+                      "assets/images/insurance.png",
+                      height: 30,
+                    ),
                   ),
                   title: Text('Insurance'),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.verified_user),
+                  icon: Container(
+                    child: Image.asset(
+                      "assets/images/profile.png",
+                      height: 30,
+                    ),
+                  ),
                   title: Text('Profile'),
                 ),
               ],
