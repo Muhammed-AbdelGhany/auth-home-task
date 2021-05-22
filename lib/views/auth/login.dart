@@ -41,10 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((value) {
         Navigator.pushReplacementNamed(context, BottomBarScreen.routeName);
       });
+    }
+    Future.delayed(Duration(seconds: 2), () {
       setState(() {
         _isLoading = false;
       });
-    }
+    });
   }
 
   @override
@@ -60,6 +62,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: BoxDecoration(color: AppColors.pColor),
                     width: double.infinity,
                     height: height * .20,
+                    child: Container(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        fit: BoxFit.none,
+                        width: 282,
+                        height: 282,
+                      ),
+                    ),
                   ),
                   Form(
                     key: _formKey,

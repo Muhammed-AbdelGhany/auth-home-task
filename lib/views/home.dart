@@ -1,8 +1,12 @@
+import 'package:auth_ecommerce_task/models/product.dart';
 import 'package:auth_ecommerce_task/theme/colors.dart';
+import 'package:auth_ecommerce_task/widgets/product_widget.dart';
 import 'package:auth_ecommerce_task/widgets/reminders_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auth_ecommerce_task/helpers/global-widgets.dart';
 import 'package:auth_ecommerce_task/widgets/services_widget.dart';
+import 'package:auth_ecommerce_task/controllers/products_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/HomeScreen';
@@ -28,8 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> recomendedPRoducts =
+        Provider.of<Products>(context).recomendedForYouList;
+    List<Product> mostSellingProducts =
+        Provider.of<Products>(context).mostSellingProducts;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -53,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 12),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -124,6 +132,46 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 16),
               headLine('Recommended For You'),
+              SizedBox(height: 16),
+              Container(
+                height: 155,
+                child: ListView.builder(
+                  itemCount: recomendedPRoducts.length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (ctx, i) => ProductWidget(
+                      oldPrice: recomendedPRoducts[i].oldPrice,
+                      percent: recomendedPRoducts[i].percent,
+                      saved: recomendedPRoducts[i].saved,
+                      image: recomendedPRoducts[i].image,
+                      title: recomendedPRoducts[i].title,
+                      sRate: recomendedPRoducts[i].sRate,
+                      rRate: recomendedPRoducts[i].rRate,
+                      price: recomendedPRoducts[i].price),
+                ),
+              ),
+              SizedBox(height: 16),
+              headLine('Most Selling'),
+              SizedBox(height: 16),
+              Container(
+                height: 155,
+                child: ListView.builder(
+                  itemCount: mostSellingProducts.length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (ctx, i) => ProductWidget(
+                      oldPrice: mostSellingProducts[i].oldPrice,
+                      percent: mostSellingProducts[i].percent,
+                      saved: mostSellingProducts[i].saved,
+                      image: mostSellingProducts[i].image,
+                      title: mostSellingProducts[i].title,
+                      sRate: mostSellingProducts[i].sRate,
+                      rRate: mostSellingProducts[i].rRate,
+                      price: mostSellingProducts[i].price),
+                ),
+              ),
               SizedBox(height: 16),
             ],
           ),

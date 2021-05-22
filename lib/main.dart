@@ -1,3 +1,4 @@
+import 'package:auth_ecommerce_task/models/product.dart';
 import 'package:auth_ecommerce_task/theme/colors.dart';
 import 'package:auth_ecommerce_task/views/auth/login.dart';
 import 'package:auth_ecommerce_task/views/auth/signup.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:auth_ecommerce_task/controllers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:auth_ecommerce_task/controllers/products_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Products(),
         ),
       ],
       child: MaterialApp(
