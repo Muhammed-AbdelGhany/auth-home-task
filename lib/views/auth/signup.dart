@@ -113,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             key: ValueKey('phoneNumber'),
                             validator: (value) => AutoValidate.phone(value)
                                 ? null
-                                : 'enter a valid Phone Number',
+                                : 'Enter a valid Phone Number',
                             textInputAction: TextInputAction.next,
                             focusNode: _phoneFN,
                             onEditingComplete: () =>

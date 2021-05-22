@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text('Don\'t have an account ? '),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pushNamed(
                                       context, SignUpScreen.routeName);
                                 },
                                 child: Text(
