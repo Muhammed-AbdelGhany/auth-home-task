@@ -40,13 +40,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void onSubmit() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
     if (isValid && _checkboxval == true) {
+      setState(() {
+        _isLoading = true;
+      });
       _formKey.currentState.save();
       await Provider.of<Auth>(context, listen: false)
           .signupWithEmailAndPassword(_emailAdress, _password)
@@ -200,24 +199,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onSaved: (newValue) => _address = newValue,
                           ),
                           SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Checkbox(
-                                  value: _checkboxval,
-                                  onChanged: (bool newVal) {
-                                    setState(() {
-                                      _checkboxval = newVal;
-                                    });
-                                  }),
-                              Text("I have Read and agree to the "),
-                              Text(
-                                "Terms and conditions",
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.blue[600]),
-                              ),
-                            ],
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                    value: _checkboxval,
+                                    onChanged: (bool newVal) {
+                                      setState(() {
+                                        _checkboxval = newVal;
+                                      });
+                                    }),
+                                Text("I have Read and agree to the "),
+                                Text(
+                                  "Terms and conditions",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue[600]),
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: height * 0.09,

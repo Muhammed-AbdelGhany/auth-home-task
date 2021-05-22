@@ -28,25 +28,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onSubmit() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
+      setState(() {
+        _isLoading = true;
+      });
       _formKey.currentState.save();
       await Provider.of<Auth>(context, listen: false)
           .loginWithEmailAndPAssword(_emailAdress, _password)
           .then((value) {
         Navigator.pushReplacementNamed(context, BottomBarScreen.routeName);
       });
-    }
-    Future.delayed(Duration(seconds: 2), () {
-      setState(() {
-        _isLoading = false;
+      Future.delayed(Duration(seconds: 2), () {
+        setState(() {
+          _isLoading = false;
+        });
       });
-    });
+    }
   }
 
   @override
