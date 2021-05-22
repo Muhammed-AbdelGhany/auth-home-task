@@ -1,6 +1,7 @@
 import 'package:auth_ecommerce_task/theme/colors.dart';
 import 'package:auth_ecommerce_task/views/auth/login.dart';
 import 'package:auth_ecommerce_task/views/auth/signup.dart';
+import 'package:auth_ecommerce_task/views/bottom_bar.dart';
 import 'package:auth_ecommerce_task/views/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:auth_ecommerce_task/controllers/auth_provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomeScreen.routeName: (cxt) => HomeScreen(),
           SignUpScreen.routeName: (cxt) => SignUpScreen(),
+          BottomBarScreen.routeName: (cxt) => BottomBarScreen(),
         },
       ),
     );

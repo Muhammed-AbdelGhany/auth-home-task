@@ -1,4 +1,5 @@
 import 'package:auth_ecommerce_task/views/auth/signup.dart';
+import 'package:auth_ecommerce_task/views/bottom_bar.dart';
 import 'package:auth_ecommerce_task/views/home.dart';
 import 'package:auto_validate/auto_validate.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await Provider.of<Auth>(context, listen: false)
           .loginWithEmailAndPAssword(_emailAdress, _password)
           .then((value) {
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        Navigator.pushReplacementNamed(context, BottomBarScreen.routeName);
       });
       setState(() {
         _isLoading = false;

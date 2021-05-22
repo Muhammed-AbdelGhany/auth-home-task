@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:auth_ecommerce_task/controllers/auth_provider.dart';
 
+import '../bottom_bar.dart';
+
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/SignUpScreen';
   @override
@@ -49,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await Provider.of<Auth>(context, listen: false)
           .signupWithEmailAndPassword(_emailAdress, _password)
           .then((value) {
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        Navigator.pushReplacementNamed(context, BottomBarScreen.routeName);
       });
       setState(() {
         _isLoading = false;
