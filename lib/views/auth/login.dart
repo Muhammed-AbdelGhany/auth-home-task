@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             key: ValueKey('email'),
                             validator: (value) => AutoValidate.email(value)
                                 ? null
-                                : 'enter a valid Email',
+                                : 'Enter a valid Email',
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () => FocusScope.of(context)
                                 .requestFocus(_passwordFN),
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             key: ValueKey('password'),
                             validator: (value) => AutoValidate.password(value)
                                 ? null
-                                : 'enter a valid Password',
+                                : 'Enter a valid Password, EX: Ss123456',
                             textInputAction: TextInputAction.done,
                             focusNode: _passwordFN,
                             onEditingComplete: onSubmit,
